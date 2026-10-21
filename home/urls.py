@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import *
+from . import views  # <--- INI YANG TADI KETINGGALAN DAN BIKIN CRASH!
 
 urlpatterns = [
     path('', views.kasir, name='kasir'),
