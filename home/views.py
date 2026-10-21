@@ -9,6 +9,10 @@ def home(request):
     return redirect('/admin/')  # Langsung lempar ke Dashboard Admin setelah login
 
 @login_required(login_url='/admin/login/')
+def kasir(request):
+    return render(request, 'kasir.html')  # <--- INI YANG KURANG (Menangani tampilan kasir)
+
+@login_required(login_url='/admin/login/')
 def laporan(request):
     bulan = request.GET.get('bulan', datetime.date.today().month)
     tahun = request.GET.get('tahun', datetime.date.today().year)
