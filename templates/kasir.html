@@ -884,7 +884,7 @@ function logout() {
             'X-CSRFToken': getCookie('csrftoken')
         }
     }).then(() => {
-        window.location.replace('http://127.0.0.1:8000/admin/login/');
+        window.location.replace('/admin/login/');
     });
 }
 
