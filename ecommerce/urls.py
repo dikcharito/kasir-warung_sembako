@@ -9,17 +9,18 @@ admin.site.index_title = "Selamat Datang"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    
-    # Ubah path kosong ini agar langsung mengarah ke app accounts (halaman login)
-    path('', include('accounts.urls')), 
-    
+
+    path('', include('accounts.urls')), # atau diarahkan ke accounts/login
     path('products/', include('products.urls')),
-    path('transaksi/', include('transaksi.urls')),
-    path('pelanggan/', include('pelanggan.urls')),
+
+    # Komentar baris ini dulu kalau foldernya belum ada:
+    # path('transaksi/', include('transaksi.urls')),
+    # path('pelanggan/', include('pelanggan.urls')),
+
     path('api/', include('products.urls')),
     path('api/accounts/', include('accounts.urls')),
-    #path('api/', include('cart.urls')),
 ]
+
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
