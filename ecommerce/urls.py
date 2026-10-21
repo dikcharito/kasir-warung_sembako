@@ -11,11 +11,11 @@ admin.site.index_title = "Selamat Datang"
 urlpatterns = [
     path('admin/', admin.site.urls),
     
-    # Lempar otomatis dari root (/) ke /products/
+    # Lempar root (/) otomatis ke halaman produk utama
     path('', RedirectView.as_view(url='/products/', permanent=False)),
     
-    # Cukup tulis 'products/' sekali saja di sini:
-    path('products/', include('products.urls')),
+    # Cukup pakai path kosong ('') di sini agar struktur asli di products/urls.py tidak kedobelan
+    path('', include('products.urls')),
     
     # API endpoints
     path('api/', include('products.urls')),
