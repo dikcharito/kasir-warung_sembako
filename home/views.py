@@ -1,14 +1,18 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from products.models import Transaksi, DetailTransaksi
 from django.db.models import Sum
 import datetime
 
+@login_required(login_url='/admin/login/')
 def home(request):
     return render(request, 'home.html')
 
+@login_required(login_url='/admin/login/')
 def kasir(request):
     return render(request, 'kasir.html')
 
+@login_required(login_url='/admin/login/')
 def laporan(request):
     # Filter by bulan/tahun kalau ada
     bulan = request.GET.get('bulan', datetime.date.today().month)
