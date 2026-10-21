@@ -5,10 +5,6 @@ from django.db.models import Sum
 import datetime
 
 @login_required(login_url='/admin/login/')
-def home(request):
-    return render(request, 'home.html')
-
-@login_required(login_url='/admin/login/')
 def kasir(request):
     return render(request, 'kasir.html')
 
