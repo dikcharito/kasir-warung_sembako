@@ -1,30 +1,25 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from products.models import Transaksi, DetailTransaksi
 from django.db.models import Sum
 import datetime
 
 @login_required(login_url='/admin/login/')
-def kasir(request):
-    return render(request, 'kasir.html')
+def home(request):
+    return redirect('/admin/')  # Langsung lempar ke Dashboard Admin setelah login
 
 @login_required(login_url='/admin/login/')
 def laporan(request):
-    # Filter by bulan/tahun kalau ada
     bulan = request.GET.get('bulan', datetime.date.today().month)
     tahun = request.GET.get('tahun', datetime.date.today().year)
 
-    # Ambil semua transaksi bulan ini
     transaksi = Transaksi.objects.filter(
         created_at__month=bulan,
         created_at__year=tahun
     )
 
-    # Hitung total
-    total_pendapatan = transaksi.aggregate(
-        Sum('total_harga'))['total_harga__sum'] or 0
-    total_hpp = transaksi.aggregate(
-        Sum('total_hpp'))['total_hpp__sum'] or 0
+    total_pendapatan = transaksi.aggregate(Sum('total_harga'))['total_harga__sum'] or 0
+    total_hpp = transaksi.aggregate(Sum('total_hpp'))['total_hpp__sum'] or 0
     total_laba = total_pendapatan - total_hpp
     total_transaksi = transaksi.count()
 
